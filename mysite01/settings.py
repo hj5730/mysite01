@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'guestbook',
     'user',
     'board',
+    'mathfilters', # mathfilters 쓰려면 pip install django-mathfilters 해서 터미널에서 설치해야함
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -133,3 +134,6 @@ STATIC_URL = '/assets/'
 
 # session cookies(csrftoken) stored in memory (로그인 정보 유지X 나갔다 들어오면 자동 로그아웃 처리)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Django will save the session to the database on every single request.
+SESSION_SAVE_EVERY_REQUEST = True

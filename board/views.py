@@ -6,21 +6,24 @@ from board import models
 LIST_COUNT = 10
 
 def index(request):
-    page = request.GET["p"]
+    page = request.GET.get("p")
+    page = 1 if page is None else int(page)
 
-    totalcount = models.count()
-    boardlist = models.findall(page, LIST_COUNT)
+    print(page)
+
+    # totalcount = models.count()
+    # boardlist = models.findall(page, LIST_COUNT)
 
     # paging 정보를 계산
-    pagecount = ceil(totalcount / LIST_COUNT)
+    # pagecount = ceil(totalcount / LIST_COUNT)
 
-    data = {
-        "boardlist": boardlist,
-        'pagecount': pagecount,
-        'nextpage': 7,
-        'prvpage': 5,
-        'curpage': 2
-    }
+    # data = {
+    #     "boardlist": boardlist,
+    #     'pagecount': pagecount,
+    #     'nextpage': 7,
+    #     'prvpage': 5,
+    #     'curpage': 2
+    # }
 
     return render(request, 'board/index.html')
 

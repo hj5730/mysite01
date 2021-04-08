@@ -23,6 +23,9 @@ urlpatterns = [
     path('', mainviews.index),
 
     path('guestbook/', guestbookviews.index),
+    path('guestbook/add', guestbookviews.add),
+    path('guestbook/deleteform', guestbookviews.deleteform),
+    path('guestbook/delete', guestbookviews.delete),
 
     path('user/joinform', userviews.joinform),
     path('user/join', userviews.join),

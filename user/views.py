@@ -7,8 +7,10 @@ from user import models
 def joinform(request):
     return render(request, 'user/joinform.html')
 
+
 def joinsuccess(request):
     return render(request, 'user/joinsuccess.html')
+
 
 def join(request):
     name = request.POST["name"]
@@ -20,8 +22,10 @@ def join(request):
 
     return HttpResponseRedirect('/user/joinsuccess')
 
+
 def loginform(request):
     return render(request, 'user/loginform.html')
+
 
 def login(request):
     email = request.POST["email"]
@@ -32,22 +36,39 @@ def login(request):
         return HttpResponseRedirect('/user/loginform?result=fail')
 
     # login 처리
+    print(type(result))
     request.session["authuser"] = result
+
     return HttpResponseRedirect('/')
+
 
 def logout(request):
     del request.session["authuser"]
     return HttpResponseRedirect('/')
 
+
 def updateform(request):
-    request.session.get("authuser")
-    # ACCESS Control(접근 제어)
+    # Access Control(접근 제어)
+    authuser = request.session.get("authuser")
     if authuser is None:
         return HttpResponseRedirect('/')
 
-    authuser = request.session["authuser"]
-    result = models.findbyno(authuser["no"])
-    return render(request, 'user/updateform.html')
+    no = request.session['authuser']['no']
+
+    # 1. 데이터를 가져오기
+    result = models.findbyno(no)
+    data = {'user': result}
+
+    return render(request, 'user/updateform.html', data)
+
 
 def update(request):
-    pass
+    no = request.session['authuser']['no']
+    name = request.POST['name']
+    password = request.POST['password']
+    gender = request.POST['gender']
+
+    models.update(no, name, password, gender)
+    request.session['authuser'] = {'no': no, 'name': name}
+
+    return HttpResponseRedirect('/user/updateform')
