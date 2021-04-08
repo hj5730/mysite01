@@ -24,4 +24,6 @@ urlpatterns = [
     path('guestbook/', guestbookviews.index),
 
     path('user/joinform', userviews.joinform),
+    path('user/join', userviews.join),
+    path('user/joinsuccess', userviews.joinsuccess),
 ]
