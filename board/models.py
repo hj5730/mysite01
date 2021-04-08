@@ -15,10 +15,11 @@ def findall():
         # SQL 실행
         sql = '''
           select no,
-                 name,
-                 message,
+                 title,
+                 contents,
+                 hit,
                  date_format(reg_date, "%Y-%m-%d %p %h:%i:%s") as reg_date
-            from guestbook
+            from board
         order by reg_date desc'''
         cursor.execute(sql)
 
@@ -36,7 +37,7 @@ def findall():
         print(f'error: {e}')
 
 
-def insert(name, password, message):
+def insert(title, contents):
     try:
         # 연결
         db = conn()
@@ -45,8 +46,8 @@ def insert(name, password, message):
         cursor = db.cursor()
 
         # SQL 실행
-        sql = 'insert into guestbook values(null, %s, %s, %s, now())'
-        count = cursor.execute(sql, (name, password, message))
+        sql = 'insert into board value(null, %s, %s, ifnull((select max(g_no) from board), 0) + 1, 1, 0)'
+        count = cursor.execute(sql, (title, contents))
 
         # commit
         db.commit()
