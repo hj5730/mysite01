@@ -33,4 +33,5 @@ urlpatterns = [
     path('user/updateform', userviews.updateform),
 
     path('board/', boardviews.index),
+    path('board/view', boardviews.view),
 ]

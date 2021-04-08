@@ -41,7 +41,7 @@ def logout(request):
 
 def updateform(request):
     request.session.get("authuser")
-    # ACCESS Control
+    # ACCESS Control(접근 제어)
     if authuser is None:
         return HttpResponseRedirect('/')
 
