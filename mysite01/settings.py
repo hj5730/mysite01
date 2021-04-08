@@ -129,3 +129,6 @@ STATICFILES_DIRS = (
 # 요소가 1개가 아니니까 DIRS로 S를 꼭 붙여야한다.
 
 STATIC_URL = '/assets/'
+
+# session cookies(csrftoken) stored in memory (로그인 정보 유지X 나갔다 들어오면 자동 로그아웃 처리)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
