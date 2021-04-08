@@ -32,6 +32,10 @@ def view(request):
     return render(request, 'board/view.html')
 
 def write(request):
+    title = request.POST['title']
+    content = request.POST['content']
+
+    models.insert(title, contents)
     return render(request, 'board/write.html')
 
 def updateform(request):
