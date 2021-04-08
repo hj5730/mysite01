@@ -4,6 +4,7 @@ from MySQLdb import connect, OperationalError
 from MySQLdb.cursors import DictCursor
 
 def findbyno():
+    sql = 'select no, name, email, gender from user where no = %s'
     pass
 
 def findby_email_and_password(email, password): # app 에다가 주는 것

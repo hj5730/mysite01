@@ -38,3 +38,16 @@ def login(request):
 def logout(request):
     del request.session["authuser"]
     return HttpResponseRedirect('/')
+
+def updateform(request):
+    request.session.get("authuser")
+    # ACCESS Control
+    if authuser is None:
+        return HttpResponseRedirect('/')
+
+    authuser = request.session["authuser"]
+    result = models.findbyno(authuser["no"])
+    return render(request, 'user/updateform.html')
+
+def update(request):
+    pass
